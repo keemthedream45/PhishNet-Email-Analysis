@@ -12,6 +12,7 @@ This lab will develop my practical skills in email forensics and phishing detect
 
 ### Tools Used
 - Isolated VM (Fedora) — run analysis safely, take snapshots.
+- AI tools (chatGPT) - to quickly decode the Base64 block
 - Text editor / pager (vim, less) — view raw email files and headers.
 - unzip — inspect ZIP contents (inside VM).
 - grep — parse headers quickly from raw email.
@@ -52,6 +53,10 @@ Since the email appeared legitimate, it was likely not flagged as spam. The SPF 
 
 --
 
+My final three questions were: "What is the SHA-256 hash of the attachment?", "What is the filename of the malicious file contained within the ZIP attachment?", and "Which MITRE ATT&CK techniques are associated with this attack?"
+To determine the hash, I used an AI tool to decode the Base64 string found at the bottom of the email footer into hex, which revealed details such as the decoded blob length, ZIP file header, and the malicious file name. For the last question, I concluded that the attack aligned with the MITRE ATT&CK technique T1566.001 — Spearphishing Attachment, where an adversary delivers a malicious ZIP attachment containing malware to compromise the target system.
+<img width="643" height="560" alt="Screenshot From 2025-10-31 15-27-55" src="https://github.com/user-attachments/assets/54e839af-f7bd-4134-a183-e6bf9930f820" />
+<img width="1153" height="1094" alt="Screenshot From 2025-10-31 15-28-37" src="https://github.com/user-attachments/assets/aad72a5b-061f-4de1-bf29-c2306f325c90" />
 
 
-
+-- Link To Lab (https://labs.hackthebox.com/achievement/sherlock/2520523/985)
