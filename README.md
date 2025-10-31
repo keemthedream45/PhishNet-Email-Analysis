@@ -25,6 +25,8 @@ The first step that was asked is "What is the originating IP address of the send
 <img width="752" height="184" alt="Screenshot From 2025-10-31 00-56-40" src="https://github.com/user-attachments/assets/bfb824ab-6fdb-4fd5-bc07-378e3d201a89" />
 <img width="803" height="183" alt="Screenshot From 2025-10-31 01-03-25" src="https://github.com/user-attachments/assets/0024f236-f1d9-4e31-bd4d-e179ff1544ab" />
 <img width="471" height="27" alt="Screenshot From 2025-10-31 01-14-17" src="https://github.com/user-attachments/assets/08dcd8ce-cde0-4f0c-95c6-a977f667c8e8" />
+
+
 From there I used [less] to view the email headers; the X-Originating-IP field showed 45.67.89.10, which is the originating IP address.
 <img width="892" height="644" alt="Screenshot From 2025-10-31 01-15-27" src="https://github.com/user-attachments/assets/167c6cbc-aab5-4af3-9d4a-4211b52a1c4d" />
 
@@ -33,4 +35,23 @@ From there I used [less] to view the email headers; the X-Originating-IP field s
 My next question in the lab was, "Which mail server relayed this email before reaching the victim?" I inspected the Received header chain and identified the final mail server that relayed the message before delivery to be [203.0.113.25].
 <img width="816" height="195" alt="Screenshot From 2025-10-31 02-20-04" src="https://github.com/user-attachments/assets/76a59bc9-5ede-43b2-82d1-8813888bfc88" />
 <img width="1149" height="1150" alt="Screenshot From 2025-10-31 02-16-35" src="https://github.com/user-attachments/assets/1dd8c648-e54f-4af8-86f5-3eae38f44221" />
+
+--
+
+My third and fourth questions were: "What is the sender's email address?" and "What is the 'Reply-To' email address specified in the email?"
+By examining the body of the email, I found the sender’s email listed at the top and the “Reply-To” address near the bottom. The two addresses were different, which is a major red flag indicating a potential spoofing or phishing attempt.
+<img width="804" height="377" alt="Screenshot From 2025-10-31 02-48-08" src="https://github.com/user-attachments/assets/8051aa0b-4d07-4580-8ea8-3c5e98be5db5" />
+<img width="1149" height="1150" alt="Screenshot From 2025-10-31 02-56-21" src="https://github.com/user-attachments/assets/00821b58-4945-456e-995e-5141f4f67ece" />
+
+--
+
+The next questions were: "What is the SPF (Sender Policy Framework) result for this email?", "What is the domain used in the phishing URL inside the email?", and "What is the fake company name used in the email?"
+Since the email appeared legitimate, it was likely not flagged as spam. The SPF result, found in the [Received-SPF:] header, showed a pass. For the remaining two questions, I examined the body of the email, where I identified both the phishing domain used in the malicious link and the fake company name presented in the message.
+<img width="804" height="377" alt="Screenshot From 2025-10-31 02-48-08" src="https://github.com/user-attachments/assets/3d4723d4-1328-492e-b3db-4f07ed3f851b" />
+<img width="1149" height="1150" alt="Screenshot From 2025-10-31 02-56-21" src="https://github.com/user-attachments/assets/589d53a7-3f5e-49c6-ae08-7505439f4e85" />
+
+--
+
+
+
 
